@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/EmployeePortal.css';
 
@@ -10,11 +10,15 @@ export default function EmployeeLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/employee/dashboard';
+
+  if (isAuthenticated) {
+    return <Navigate to="/employee/dashboard" replace />;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -175,12 +179,6 @@ export default function EmployeeLogin() {
               Fill Credentials
             </button>
           </div>
-        </div>
-
-        <div style={{ textAlign: 'center', marginTop: 24 }}>
-          <Link to="/" style={{ color: 'var(--portal-text-subtle)', fontSize: 12.5, textDecoration: 'none' }}>
-            ← Back to Mentneo Main Website
-          </Link>
         </div>
       </div>
     </div>
