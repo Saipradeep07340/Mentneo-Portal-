@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Query, UploadFile, File, Form, status
 from typing import Optional
-from backend.app.core.security import get_current_employee
-from backend.app.schemas.attendance import AttendanceActionPayload, BreakStartPayload, CorrectionRequestPayload
-from backend.app.services.attendance_service import AttendanceService
-from backend.app.services.face_service import FaceService
-from backend.app.utils.image_processing import load_image_from_bytes_or_base64
+from app.core.security import get_current_employee
+from app.schemas.attendance import AttendanceActionPayload, BreakStartPayload, CorrectionRequestPayload
+from app.services.attendance_service import AttendanceService
+from app.services.face_service import FaceService
+from app.utils.image_processing import load_image_from_bytes_or_base64
 
 router = APIRouter(prefix="/attendance", tags=["Attendance Tracking"])
 

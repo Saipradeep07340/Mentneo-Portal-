@@ -2,10 +2,10 @@ import json
 import uuid
 import numpy as np
 from fastapi import HTTPException, status
-from backend.app.core.database import get_db
-from backend.app.core.config import settings
-from backend.app.services.recognition_service import face_engine
-from backend.app.services.liveness_service import LivenessService
+from app.core.database import get_db
+from app.core.config import settings
+from app.services.recognition_service import face_engine
+from app.services.liveness_service import LivenessService
 import logging
 
 logger = logging.getLogger("mentneo.face_service")

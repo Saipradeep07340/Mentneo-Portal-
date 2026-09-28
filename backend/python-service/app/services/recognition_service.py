@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 from typing import Tuple, List, Optional
-from backend.app.core.config import settings
+from app.core.config import settings
 import logging
 
 logger = logging.getLogger("mentneo.face")

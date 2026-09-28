@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, UploadFile, File, Form, status
 from typing import Optional
-from backend.app.core.security import get_current_employee
-from backend.app.schemas.face import FaceBase64Payload, FaceVerificationResponse, FaceRegistrationResponse, FaceStatusResponse
-from backend.app.services.face_service import FaceService
-from backend.app.utils.image_processing import load_image_from_bytes_or_base64
+from app.core.security import get_current_employee
+from app.schemas.face import FaceBase64Payload, FaceVerificationResponse, FaceRegistrationResponse, FaceStatusResponse
+from app.services.face_service import FaceService
+from app.utils.image_processing import load_image_from_bytes_or_base64
 
 router = APIRouter(prefix="/face", tags=["Face Recognition"])
 
@@ -35,8 +35,8 @@ async def register_face(
             elif "templateData" in body and isinstance(body["templateData"], list):
                 # Fallback if frontend sends pre-extracted vector (for backwards compatibility)
                 import json, uuid
-                from backend.app.core.database import get_db
-                from backend.app.core.config import settings
+                from app.core.database import get_db
+                from app.core.config import settings
                 with get_db() as cur:
                     cur.execute("""
                         INSERT INTO face_enrollments (id, employee_id, template_data, model_version, quality_score, status, updated_at)
@@ -98,9 +98,9 @@ async def verify_face(
             elif "templateData" in body and isinstance(body["templateData"], list):
                 # Backwards-compatible vector comparison
                 import numpy as np, json
-                from backend.app.core.database import get_db
-                from backend.app.services.recognition_service import face_engine
-                from backend.app.core.config import settings
+                from app.core.database import get_db
+                from app.services.recognition_service import face_engine
+                from app.core.config import settings
                 with get_db() as cur:
                     cur.execute("SELECT template_data FROM face_enrollments WHERE employee_id = %s AND status = 'ACTIVE'", (current_employee["id"],))
                     row = cur.fetchone()

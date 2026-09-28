@@ -7,12 +7,12 @@ from fastapi.responses import JSONResponse
 from zoneinfo import ZoneInfo
 from datetime import datetime
 
-from backend.app.core.config import settings
-from backend.app.core.database import get_db
-from backend.app.services.recognition_service import face_engine
-from backend.app.api.auth import router as auth_router
-from backend.app.api.face import router as face_router
-from backend.app.api.attendance import router as attendance_router
+from app.core.config import settings
+from app.core.database import get_db
+from app.services.recognition_service import face_engine
+from app.api.auth import router as auth_router
+from app.api.face import router as face_router
+from app.api.attendance import router as attendance_router
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -111,4 +111,4 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.app.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

@@ -535,7 +535,7 @@ function seedInitialData() {
   const mgrPass = bcryptjs.hashSync('Password@123', 10);
   db.prepare('INSERT INTO users (id, email, password_hash, full_name, role, status) VALUES (?, ?, ?, ?, ?, ?)')
     .run('usr_mgr', 'vikram.rao@mentneo.com', mgrPass, 'Dr. Vikram Rao', 'MANAGER', 'ACTIVE');
-  
+
   db.prepare(`
     INSERT INTO employees (
       id, user_id, employee_code, first_name, last_name, email, phone, address,
@@ -591,7 +591,7 @@ function seedInitialData() {
   for (const lt of leaveTypes) {
     db.prepare('INSERT INTO leave_types (id, name, code, default_days, description) VALUES (?, ?, ?, ?, ?)')
       .run(lt.id, lt.name, lt.code, lt.days, lt.desc);
-    
+
     // Assign balances to John Doe
     const used = lt.code === 'CL' ? 2 : (lt.code === 'SL' ? 1 : 0);
     const pending = lt.code === 'CL' ? 1 : 0;

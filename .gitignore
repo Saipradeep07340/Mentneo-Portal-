@@ -1,15 +1,14 @@
 # Dependencies
 node_modules/
-*/node_modules/
+**/node_modules/
 
 # Production builds
 dist/
-client/dist/
+**/dist/
 
 # Python cache & virtual environments
 __pycache__/
-*/__pycache__/
-*/*/__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 .venv/
@@ -18,14 +17,16 @@ venv/
 
 # Environment & local credentials
 .env
-backend/.env
-server/.env
+**/.env
 *.env.local
 
 # Local SQLite databases & logs
-data/*.db
-data/*.db-wal
-data/*.db-shm
+*.db
+*.db-wal
+*.db-shm
+**/data/*.db
+**/data/*.db-wal
+**/data/*.db-shm
 *.log
 npm-debug.log*
 yarn-debug.log*

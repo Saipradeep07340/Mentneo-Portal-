@@ -3,8 +3,8 @@ import bcrypt
 from datetime import datetime, timedelta, timezone
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from backend.app.core.config import settings
-from backend.app.core.database import get_db
+from app.core.config import settings
+from app.core.database import get_db
 
 security = HTTPBearer(auto_error=False)
 

@@ -1,7 +1,7 @@
 import psycopg
 from psycopg.rows import dict_row
 from contextlib import contextmanager
-from backend.app.core.config import settings
+from app.core.config import settings
 import logging
 
 logger = logging.getLogger("mentneo.db")

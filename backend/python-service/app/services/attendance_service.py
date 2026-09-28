@@ -3,8 +3,8 @@ import json
 from datetime import datetime, date, time, timedelta
 from zoneinfo import ZoneInfo
 from fastapi import HTTPException, status
-from backend.app.core.database import get_db
-from backend.app.core.config import settings
+from app.core.database import get_db
+from app.core.config import settings
 import logging
 
 logger = logging.getLogger("mentneo.attendance")

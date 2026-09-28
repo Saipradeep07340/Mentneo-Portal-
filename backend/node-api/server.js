@@ -42,11 +42,11 @@ app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5000', creden
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(morgan('dev'));
-const clientDist = path.join(__dirname, '..', 'client', 'dist');
+const clientDist = path.join(__dirname, '..', '..', 'frontend', 'dist');
 if (fs.existsSync(clientDist)) {
   app.use(express.static(clientDist));
 }
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(path.join(__dirname, '..', '..')));
 
 const driver = neo4j.driver(
   process.env.NEO4J_URI || 'neo4j://localhost:7687',
@@ -57,6 +57,8 @@ const driver = neo4j.driver(
 );
 
 import db, { initDatabase } from './db.js';
+// Initialize SQLite relational schema and seed entities
+initDatabase();
 import employeeRouter from './routes/employee.js';
 import authRouter from './routes/auth.js';
 
@@ -106,9 +108,9 @@ app.use('/api/auth', authRouter);
 app.use('/api/employee', employeeRouter);
 
 app.get('/api/health', async (req, res) => {
-  res.json({ 
-    ok: true, 
-    message: 'Mentneo backend is running', 
+  res.json({
+    ok: true,
+    message: 'Mentneo backend is running',
     database: 'SQLite persistent relational database active',
     timestamp: new Date().toISOString()
   });
@@ -187,7 +189,7 @@ app.get('/api/careers/jobs', async (req, res) => {
       .select('*')
       .eq('published', true)
       .order('created_at', { ascending: false });
-    
+
     if (error) throw error;
     res.json({ jobs: data || [] });
   } catch (error) {
@@ -205,10 +207,10 @@ app.get('/api/careers/jobs/:id', async (req, res) => {
       .eq('id', req.params.id)
       .eq('published', true)
       .single();
-    
+
     if (error) throw error;
     if (!data) return res.status(404).json({ error: 'Job not found' });
-    
+
     res.json({ job: data });
   } catch (error) {
     console.error('Error fetching job:', error);
@@ -244,7 +246,7 @@ app.post('/api/careers/apply', upload.single('resume'), async (req, res) => {
 
     // Generate application ID
     const applicationId = generateApplicationId();
-    
+
     // Upload resume to Supabase Storage
     const fileName = `resumes/${applicationId}-${Date.now()}-${req.file.originalname}`;
     const { data: uploadData, error: uploadError } = await supabase.storage

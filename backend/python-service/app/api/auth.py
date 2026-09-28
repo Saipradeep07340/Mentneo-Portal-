@@ -2,8 +2,8 @@ import uuid
 import json
 from pydantic import BaseModel, EmailStr
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from backend.app.core.database import get_db
-from backend.app.core.security import verify_password, create_access_token, get_current_employee, get_current_user
+from app.core.database import get_db
+from app.core.security import verify_password, create_access_token, get_current_employee, get_current_user
 
 router = APIRouter(prefix="/auth/employee", tags=["Authentication"])
 

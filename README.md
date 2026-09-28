@@ -52,23 +52,23 @@ Production-ready enterprise platform for Mentneo featuring the corporate website
 ### 2. Installation
 ```bash
 # Install Node dependencies
-npm install --prefix server
-npm install --prefix client
+npm install --prefix backend/node-api
+npm install --prefix frontend
 
 # Install Python backend dependencies
-pip install -r backend/requirements.txt
+pip install -r backend/python-service/requirements.txt
 ```
 
 ### 3. Environment Configuration
-Create `backend/.env` from the provided template:
+Create `backend/python-service/.env` from the provided template:
 ```bash
-cp backend/.env.example backend/.env
+cp backend/python-service/.env.example backend/python-service/.env
 ```
 Ensure your `DATABASE_URL` is set to your PostgreSQL database.
 
 ### 4. Database Migration
 ```bash
-python backend/migrate_neon.py
+python backend/python-service/migrate_neon.py
 ```
 
 ### 5. Running the Application
@@ -79,8 +79,8 @@ npm run start:backend
 # Terminal 2: Start Fullstack Node Server (port 5000)
 npm start
 
-# Terminal 3: Start Client Dev Server (port 5173)
-npm --prefix client run dev
+# Terminal 3: Start Frontend Dev Server (port 5173)
+npm run start:frontend
 ```
 
 ### 6. Automated Testing

@@ -4,8 +4,8 @@ import base64
 import cv2
 import numpy as np
 from fastapi.testclient import TestClient
-from backend.app.main import app
-from backend.app.core.database import get_db
+from app.main import app
+from app.core.database import get_db
 
 client = TestClient(app)
 

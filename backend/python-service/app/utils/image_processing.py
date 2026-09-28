@@ -2,7 +2,7 @@ import base64
 import cv2
 import numpy as np
 from fastapi import HTTPException, status
-from backend.app.core.config import settings
+from app.core.config import settings
 
 def load_image_from_bytes_or_base64(raw_input: bytes | str) -> np.ndarray:
     """
