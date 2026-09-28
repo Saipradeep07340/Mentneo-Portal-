@@ -1,0 +1,14 @@
+{
+  "name": "mentneo-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server/server.js",
+    "start": "node server/server.js",
+    "start:backend": "python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000",
+    "build": "npm --prefix client run build",
+    "test": "python -m backend.tests.test_attendance_face",
+    "test:fullstack": "node -e \"import('./server/server.js'); setTimeout(async () => { try { await import('./tests/employee_test.mjs'); } catch(e) { console.error(e); process.exit(1); } }, 1200);\"",
+    "install:all": "npm install --prefix server && npm install --prefix client && pip install -r backend/requirements.txt"
+  }
+}
